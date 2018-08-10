@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3013facf-bad5-4912-b174-b70302800fa6" name="rqr.moscow" url="http://rqr.moscow">
+        <fileTransfer host="rqr.moscow" port="22" rootFolder="/var/www/x-racing/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="055c928b-5d15-4f6a-a530-e255fbab7de7" name="x-racing.xo.local" url="http://xo.local">
+        <fileTransfer host="xo.local" port="22" rootFolder="/var/www/x-racing" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
