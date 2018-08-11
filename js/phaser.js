@@ -35249,7 +35249,7 @@ Phaser.Group.prototype.preUpdate = function ()
         return false;
     }
 
-    // This chunk is identical to Phaser.Component.Core.prototype.preUpdateChildren, which is not yet defined.
+    // This chunk is identical to Phaser.Component.Main.prototype.preUpdateChildren, which is not yet defined.
     // This can't loop in reverse, we need the renderOrderID to be in sequence
     var i = 0;
 
@@ -48798,18 +48798,18 @@ Phaser.Component.BringToTop.prototype.moveDown = function ()
 */
 
 /**
-* Core Component Features.
+* Main Component Features.
 *
 * @class
 */
-Phaser.Component.Core = function () {};
+Phaser.Component.Main = function () {};
 
 /**
  * @property {boolean} skipTypeChecks - Skip type checks in {@link #init}.
  * @static
  * @default
  */
-Phaser.Component.Core.skipTypeChecks = false;
+Phaser.Component.Main.skipTypeChecks = false;
 
 /**
 * Installs / registers mixin components.
@@ -48819,11 +48819,11 @@ Phaser.Component.Core.skipTypeChecks = false;
 * @method
 * @protected
 */
-Phaser.Component.Core.install = function (components)
+Phaser.Component.Main.install = function (components)
 {
 
-    // Always install 'Core' first
-    Phaser.Utils.mixinPrototype(this, Phaser.Component.Core.prototype);
+    // Always install 'Main' first
+    Phaser.Utils.mixinPrototype(this, Phaser.Component.Main.prototype);
 
     this.components = {};
 
@@ -48852,10 +48852,10 @@ Phaser.Component.Core.install = function (components)
 * @method
 * @protected
 */
-Phaser.Component.Core.init = function (game, x, y, key, frame)
+Phaser.Component.Main.init = function (game, x, y, key, frame)
 {
 
-    if (!Phaser.Component.Core.skipTypeChecks)
+    if (!Phaser.Component.Main.skipTypeChecks)
     {
         if (!(game instanceof Phaser.Game))
         {
@@ -48910,7 +48910,7 @@ Phaser.Component.Core.init = function (game, x, y, key, frame)
 
 };
 
-Phaser.Component.Core.preUpdate = function ()
+Phaser.Component.Main.preUpdate = function ()
 {
 
     if (this.pendingDestroy)
@@ -48951,7 +48951,7 @@ Phaser.Component.Core.preUpdate = function ()
 
 };
 
-Phaser.Component.Core.prototype = {
+Phaser.Component.Main.prototype = {
 
     /**
     * A reference to the currently running Game.
@@ -52439,14 +52439,14 @@ Phaser.Sprite = function (game, x, y, key, frame)
 
     PIXI.Sprite.call(this, Phaser.Cache.DEFAULT);
 
-    Phaser.Component.Core.init.call(this, game, x, y, key, frame);
+    Phaser.Component.Main.init.call(this, game, x, y, key, frame);
 
 };
 
 Phaser.Sprite.prototype = Object.create(PIXI.Sprite.prototype);
 Phaser.Sprite.prototype.constructor = Phaser.Sprite;
 
-Phaser.Component.Core.install.call(Phaser.Sprite.prototype, [
+Phaser.Component.Main.install.call(Phaser.Sprite.prototype, [
     'Angle',
     'Animation',
     'AutoCull',
@@ -52472,7 +52472,7 @@ Phaser.Component.Core.install.call(Phaser.Sprite.prototype, [
 Phaser.Sprite.prototype.preUpdatePhysics = Phaser.Component.PhysicsBody.preUpdate;
 Phaser.Sprite.prototype.preUpdateLifeSpan = Phaser.Component.LifeSpan.preUpdate;
 Phaser.Sprite.prototype.preUpdateInWorld = Phaser.Component.InWorld.preUpdate;
-Phaser.Sprite.prototype.preUpdateCore = Phaser.Component.Core.preUpdate;
+Phaser.Sprite.prototype.preUpdateCore = Phaser.Component.Main.preUpdate;
 
 /**
 * Automatically called by World.preUpdate.
@@ -52545,14 +52545,14 @@ Phaser.Image = function (game, x, y, key, frame)
 
     PIXI.Sprite.call(this, Phaser.Cache.DEFAULT);
 
-    Phaser.Component.Core.init.call(this, game, x, y, key, frame);
+    Phaser.Component.Main.init.call(this, game, x, y, key, frame);
 
 };
 
 Phaser.Image.prototype = Object.create(PIXI.Sprite.prototype);
 Phaser.Image.prototype.constructor = Phaser.Image;
 
-Phaser.Component.Core.install.call(Phaser.Image.prototype, [
+Phaser.Component.Main.install.call(Phaser.Image.prototype, [
     'Angle',
     'Animation',
     'AutoCull',
@@ -52572,7 +52572,7 @@ Phaser.Component.Core.install.call(Phaser.Image.prototype, [
 
 Phaser.Image.prototype.preUpdateLifeSpan = Phaser.Component.LifeSpan.preUpdate;
 Phaser.Image.prototype.preUpdateInWorld = Phaser.Component.InWorld.preUpdate;
-Phaser.Image.prototype.preUpdateCore = Phaser.Component.Core.preUpdate;
+Phaser.Image.prototype.preUpdateCore = Phaser.Component.Main.preUpdate;
 
 /**
 * Automatically called by World.preUpdate.
@@ -58273,14 +58273,14 @@ Phaser.Graphics = function (game, x, y)
      */
     this.cachedSpriteDirty = false;
 
-    Phaser.Component.Core.init.call(this, game, x, y, '', null);
+    Phaser.Component.Main.init.call(this, game, x, y, '', null);
 
 };
 
 Phaser.Graphics.prototype = Object.create(PIXI.DisplayObjectContainer.prototype);
 Phaser.Graphics.prototype.constructor = Phaser.Graphics;
 
-Phaser.Component.Core.install.call(Phaser.Graphics.prototype, [
+Phaser.Component.Main.install.call(Phaser.Graphics.prototype, [
     'Angle',
     'AutoCull',
     'Bounds',
@@ -58296,7 +58296,7 @@ Phaser.Component.Core.install.call(Phaser.Graphics.prototype, [
 Phaser.Graphics.prototype.preUpdatePhysics = Phaser.Component.PhysicsBody.preUpdate;
 Phaser.Graphics.prototype.preUpdateLifeSpan = Phaser.Component.LifeSpan.preUpdate;
 Phaser.Graphics.prototype.preUpdateInWorld = Phaser.Component.InWorld.preUpdate;
-Phaser.Graphics.prototype.preUpdateCore = Phaser.Component.Core.preUpdate;
+Phaser.Graphics.prototype.preUpdateCore = Phaser.Component.Main.preUpdate;
 
 /**
 * Automatically called by World.preUpdate.
@@ -62736,14 +62736,14 @@ Phaser.BitmapText = function (game, x, y, font, text, size, align)
     */
     this.dirty = false;
 
-    Phaser.Component.Core.init.call(this, game, x, y, '', null);
+    Phaser.Component.Main.init.call(this, game, x, y, '', null);
 
 };
 
 Phaser.BitmapText.prototype = Object.create(PIXI.DisplayObjectContainer.prototype);
 Phaser.BitmapText.prototype.constructor = Phaser.BitmapText;
 
-Phaser.Component.Core.install.call(Phaser.BitmapText.prototype, [
+Phaser.Component.Main.install.call(Phaser.BitmapText.prototype, [
     'Angle',
     'AutoCull',
     'Bounds',
@@ -62759,7 +62759,7 @@ Phaser.Component.Core.install.call(Phaser.BitmapText.prototype, [
 Phaser.BitmapText.prototype.preUpdatePhysics = Phaser.Component.PhysicsBody.preUpdate;
 Phaser.BitmapText.prototype.preUpdateLifeSpan = Phaser.Component.LifeSpan.preUpdate;
 Phaser.BitmapText.prototype.preUpdateInWorld = Phaser.Component.InWorld.preUpdate;
-Phaser.BitmapText.prototype.preUpdateCore = Phaser.Component.Core.preUpdate;
+Phaser.BitmapText.prototype.preUpdateCore = Phaser.Component.Main.preUpdate;
 
 /**
 * Automatically called by World.preUpdate.
@@ -64041,7 +64041,7 @@ Phaser.Rope = function (game, x, y, key, frame, points)
 
     this.drawMode = Phaser.Rope.TRIANGLE_STRIP;
 
-    Phaser.Component.Core.init.call(this, game, x, y, key, frame);
+    Phaser.Component.Main.init.call(this, game, x, y, key, frame);
 
     this.refresh();
 
@@ -64050,7 +64050,7 @@ Phaser.Rope = function (game, x, y, key, frame, points)
 Phaser.Rope.prototype = Object.create(PIXI.DisplayObjectContainer.prototype);
 Phaser.Rope.prototype.constructor = Phaser.Rope;
 
-Phaser.Component.Core.install.call(Phaser.Rope.prototype, [
+Phaser.Component.Main.install.call(Phaser.Rope.prototype, [
     'Angle',
     'Animation',
     'AutoCull',
@@ -64073,7 +64073,7 @@ Phaser.Component.Core.install.call(Phaser.Rope.prototype, [
 Phaser.Rope.prototype.preUpdatePhysics = Phaser.Component.PhysicsBody.preUpdate;
 Phaser.Rope.prototype.preUpdateLifeSpan = Phaser.Component.LifeSpan.preUpdate;
 Phaser.Rope.prototype.preUpdateInWorld = Phaser.Component.InWorld.preUpdate;
-Phaser.Rope.prototype.preUpdateCore = Phaser.Component.Core.preUpdate;
+Phaser.Rope.prototype.preUpdateCore = Phaser.Component.Main.preUpdate;
 
 Phaser.Rope.TRIANGLE_STRIP = 0;
 Phaser.Rope.TRIANGLES = 1;
@@ -64939,14 +64939,14 @@ Phaser.TileSprite = function (game, x, y, width, height, key, frame)
     this._width = width;
     this._height = height;
 
-    Phaser.Component.Core.init.call(this, game, x, y, key, frame);
+    Phaser.Component.Main.init.call(this, game, x, y, key, frame);
 
 };
 
 Phaser.TileSprite.prototype = Object.create(PIXI.Sprite.prototype);
 Phaser.TileSprite.prototype.constructor = Phaser.TileSprite;
 
-Phaser.Component.Core.install.call(Phaser.TileSprite.prototype, [
+Phaser.Component.Main.install.call(Phaser.TileSprite.prototype, [
     'Angle',
     'Animation',
     'AutoCull',
@@ -64969,7 +64969,7 @@ Phaser.Component.Core.install.call(Phaser.TileSprite.prototype, [
 Phaser.TileSprite.prototype.preUpdatePhysics = Phaser.Component.PhysicsBody.preUpdate;
 Phaser.TileSprite.prototype.preUpdateLifeSpan = Phaser.Component.LifeSpan.preUpdate;
 Phaser.TileSprite.prototype.preUpdateInWorld = Phaser.Component.InWorld.preUpdate;
-Phaser.TileSprite.prototype.preUpdateCore = Phaser.Component.Core.preUpdate;
+Phaser.TileSprite.prototype.preUpdateCore = Phaser.Component.Main.preUpdate;
 
 /**
 * Automatically called by World.preUpdate.
@@ -71232,7 +71232,7 @@ Phaser.Tween.prototype = {
     },
 
     /**
-    * Core tween update function called by the TweenManager. Does not need to be invoked directly.
+    * Main tween update function called by the TweenManager. Does not need to be invoked directly.
     *
     * @method Phaser.Tween#update
     * @param {number} time - A timestamp passed in by the TweenManager.
@@ -102260,7 +102260,7 @@ Phaser.Physics.P2.BodyDebug.prototype.constructor = Phaser.Physics.P2.BodyDebug;
 Object.assign(Phaser.Physics.P2.BodyDebug.prototype, {
 
     /**
-    * Core update.
+    * Main update.
     *
     * @method Phaser.Physics.P2.BodyDebug#updateSpriteTransform
     */
@@ -106045,7 +106045,7 @@ Phaser.TilemapLayer = function (game, tilemap, index, width, height)
 Phaser.TilemapLayer.prototype = Object.create(Phaser.Sprite.prototype);
 Phaser.TilemapLayer.prototype.constructor = Phaser.TilemapLayer;
 
-Phaser.TilemapLayer.prototype.preUpdateCore = Phaser.Component.Core.preUpdate;
+Phaser.TilemapLayer.prototype.preUpdateCore = Phaser.Component.Main.preUpdate;
 
 /**
 * The shared double-copy canvas, created as needed.

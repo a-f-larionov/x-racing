@@ -1,4 +1,4 @@
-Track = new (function () {
+TrackClass = function () {
 
     /**
      * тут будет хранится трасса
@@ -173,12 +173,28 @@ Track = new (function () {
         {t: this.TILE_TYPE_BLOCK, x: 128 - 22, y: 128 - 22, w: 22, h: 22, a: 0}
     ];
     this.tileTmpls[this.TILE_VERTICAL_LEFT_FINISH] = [
-        {t: this.TILE_TYPE_SPRITE, x: 0, y: 0, w: 128, h: 128, a: 0, src: this.tileImages[this.TILE_VERTICAL_LEFT_FINISH]},
+        {
+            t: this.TILE_TYPE_SPRITE,
+            x: 0,
+            y: 0,
+            w: 128,
+            h: 128,
+            a: 0,
+            src: this.tileImages[this.TILE_VERTICAL_LEFT_FINISH]
+        },
         {t: this.TILE_TYPE_BLOCK, x: 0, y: 0, w: 22, h: 128, a: 0},
         {t: this.TILE_TYPE_FINISH, x: 0, y: 64 - 11, w: 128, h: 20, a: 0}
     ];
     this.tileTmpls[this.TILE_VERTICAL_RIGHT_FINISH] = [
-        {t: this.TILE_TYPE_SPRITE, x: 0, y: 0, w: 128, h: 128, a: 0, src: this.tileImages[this.TILE_VERTICAL_RIGHT_FINISH]},
+        {
+            t: this.TILE_TYPE_SPRITE,
+            x: 0,
+            y: 0,
+            w: 128,
+            h: 128,
+            a: 0,
+            src: this.tileImages[this.TILE_VERTICAL_RIGHT_FINISH]
+        },
         {t: this.TILE_TYPE_BLOCK, x: 128 - 22, y: 0, w: 22, h: 128, a: 0},
         {t: this.TILE_TYPE_FINISH, x: 0, y: 64 - 11, w: 128, h: 20, a: 0}
     ];
@@ -257,7 +273,7 @@ Track = new (function () {
     };
 
     this.addSegment = function (id, x, y, segmentIndex) {
-    
+
         this.segmentTmpls[id].forEach(function (seg) {
             Track.addTile(seg.tileId, x + seg.x, y + seg.y, segmentIndex);
         });
@@ -286,7 +302,7 @@ Track = new (function () {
 
             switch (tpl.t) {
                 case 1:
-                    sprite = Core.game.add.sprite(tile.x * 128 + tpl.x, tile.y * 128 + tpl.y, tpl.src);
+                    sprite = Main.game.add.sprite(tile.x * 128 + tpl.x, tile.y * 128 + tpl.y, tpl.src);
                     sprite.angle = tpl.a;
                     tile.sprite = sprite;
                     Track.overlaps.push({sprite: sprite, type: tpl.t, segmentIndex: tile.segmentIndex});
@@ -294,18 +310,18 @@ Track = new (function () {
                 case 2:
                     x = tile.x * 128 + tpl.x + tpl.w / 2;
                     y = tile.y * 128 + tpl.y + tpl.h / 2;
-                    sprite = Core.game.add.sprite(x, y, "tribune_overhang_red");
+                    sprite = Main.game.add.sprite(x, y, "tribune_overhang_red");
                     sprite.width = tpl.w;
                     sprite.height = tpl.h;
                     sprite.alpha = alpha;
-                    Core.game.physics.p2.enable(sprite);
+                    Main.game.physics.p2.enable(sprite);
                     sprite.body.static = true;
                     sprite.body.angle = tpl.a;
                     break;
                 case 3:
                     x = tile.x * 128 + tpl.x;
                     y = tile.y * 128 + tpl.y;
-                    sprite = Core.game.add.sprite(x, y, "tribune_overhang_red");
+                    sprite = Main.game.add.sprite(x, y, "tribune_overhang_red");
                     sprite.width = tpl.w;
                     sprite.height = tpl.h;
                     sprite.alpha = alpha;
@@ -335,4 +351,6 @@ Track = new (function () {
             }
         });
     }
-});
+};
+
+Track = new TrackClass();

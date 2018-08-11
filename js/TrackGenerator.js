@@ -1,7 +1,11 @@
-TrackGenerator = new (function () {
+TrackGeneratorClass = function () {
     let map;
     let track;
 
+    /**
+     * Создание пустой карты
+     * @returns {{}}
+     */
     let createEmptyMap = function () {
         let map = {};
         for (let y = 0; y < Config.worldHeight; y++) {
@@ -13,6 +17,11 @@ TrackGenerator = new (function () {
         return map;
     };
 
+    /**
+     * Создадим стартовую дорогу.
+     * @param track
+     * @param map
+     */
     let setStartFragment = function (track, map) {
         let segments =
             [
@@ -30,12 +39,24 @@ TrackGenerator = new (function () {
         });
 
     };
+    /**
+     * Расширим участок трассы
+     * @param track
+     * @param map
+     * @param target
+     */
     let bloatingTrack = function (track, map, target) {
         track.splice(target.before + 1, 0, target.a);
         track.splice(target.after + 1, 0, target.b);
         map[target.a.y][target.a.x] = 1;
         map[target.b.y][target.b.x] = 1;
     };
+    /**
+     * Найдем участки трассы для расширения
+     * @param track
+     * @param map
+     * @returns {Array}
+     */
     let findPotentialy = function (track, map) {
         let a, b, list, aI, bI;
         list = [];
@@ -80,6 +101,10 @@ TrackGenerator = new (function () {
         }
         return list;
     };
+    /**
+     * Определим направления дороги на всех участках трассы
+     * @param track
+     */
     let setDirections = function (track) {
         let a, b, c, dir;
         let ABx, ABy, CBx, CBy;
@@ -135,6 +160,10 @@ TrackGenerator = new (function () {
             track[i].dir = dir;
         }
     };
+    /**
+     * Создать трассу
+     * @returns {Array}
+     */
     this.generate = function () {
         let track, map, list, len;
 
@@ -152,4 +181,6 @@ TrackGenerator = new (function () {
 
         return track;
     };
-});
+};
+
+TrackGenerator = new TrackGeneratorClass();
